@@ -8,15 +8,23 @@ import { InjectModel } from 'nestjs-typegoose'
 import { UserModel } from 'src/user/models/user.model'
 import { AuthDTO } from './dto'
 import { hash, genSalt, compare } from 'bcryptjs'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
 	constructor(
-		@InjectModel(UserModel) private readonly userModel: ModelType<UserModel>
+		@InjectModel(UserModel) private readonly userModel: ModelType<UserModel>,
+		private readonly jwtService: JwtService
 	) {}
 
 	async login(dto: AuthDTO) {
-		return await this.validateUser(dto)
+		const user = await this.validateUser(dto)
+		const tokens = await this.createTokenPair(user._id.toString())
+
+		return {
+			user: this.returnUserFileds(user),
+			...tokens,
+		}
 	}
 
 	async validateUser(dto: AuthDTO) {
@@ -47,6 +55,32 @@ export class AuthService {
 			password: passwordHash,
 		})
 
-		return await newUser.save()
+		const tokens = await this.createTokenPair(newUser._id.toString())
+
+		return {
+			user: this.returnUserFileds(newUser),
+			...tokens,
+		}
+	}
+
+	async createTokenPair(userId: string) {
+		const payload = { _id: userId }
+
+		const refreshToken = await this.jwtService.signAsync(payload, {
+			expiresIn: '15d',
+		})
+		const accessToken = await this.jwtService.signAsync(payload, {
+			expiresIn: '1h',
+		})
+
+		return { accessToken, refreshToken }
+	}
+
+	returnUserFileds(user: UserModel) {
+		return {
+			_id: user._id,
+			email: user.email,
+			isAdmin: user.isAdmin,
+		}
 	}
 }
