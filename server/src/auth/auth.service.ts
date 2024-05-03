@@ -54,6 +54,7 @@ export class AuthService {
 			email: dto.email,
 			password: passwordHash,
 		})
+		await newUser.save()
 
 		const tokens = await this.createTokenPair(newUser._id.toString())
 
