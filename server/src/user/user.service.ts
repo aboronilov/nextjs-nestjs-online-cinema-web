@@ -59,10 +59,7 @@ export class UserService {
 			options = {
 				$or: [
 					{
-						email: {
-							$regex: searchTerm,
-							$options: 'i',
-						},
+						email: new RegExp(searchTerm, 'i'),
 					},
 				],
 			}
