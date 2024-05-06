@@ -4,23 +4,25 @@ import { AppService } from './app.service'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
 import { getMongoDbConfig } from './config/mongo.config'
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { FileModule } from './file/file.module';
+import { AuthModule } from './auth/auth.module'
+import { UserModule } from './user/user.module'
+import { FileModule } from './file/file.module'
+import { GenreModule } from './genre/genre.module'
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    TypegooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: getMongoDbConfig,
-      inject: [ConfigService],
-    }),
-    AuthModule,
-    UserModule,
-    FileModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [
+		ConfigModule.forRoot(),
+		TypegooseModule.forRootAsync({
+			imports: [ConfigModule],
+			useFactory: getMongoDbConfig,
+			inject: [ConfigService],
+		}),
+		AuthModule,
+		UserModule,
+		FileModule,
+		GenreModule,
+	],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}
