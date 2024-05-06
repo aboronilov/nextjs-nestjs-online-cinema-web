@@ -1,14 +1,26 @@
-import { Controller, Post } from '@nestjs/common'
+import {
+	Controller,
+	Param,
+	Post,
+	Query,
+	UploadedFile,
+	UseInterceptors,
+} from '@nestjs/common'
 import { FileService } from './file.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
+import { FileInterceptor } from '@nestjs/platform-express'
 
 @Controller('file')
 export class FileController {
 	constructor(private readonly fileService: FileService) {}
 
-	@Post('upload')
+	@Post()
 	@Auth('admin')
-	async saveFiles(): Promise<void> {
-		return await this.fileService.saveFiles()
+	@UseInterceptors(FileInterceptor('image'))
+	async saveFiles(
+		@UploadedFile() file: Express.Multer.File,
+		@Query('folder') folder?: string
+	) {
+		return await this.fileService.saveFiles([file], folder)
 	}
 }

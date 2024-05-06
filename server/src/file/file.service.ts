@@ -7,9 +7,10 @@ import { path } from 'app-root-path'
 export class FileService {
 	async saveFiles(
 		files: Express.Multer.File[],
-		folder: string = 'defualt'
+		folder?: string
 	): Promise<IFileResponse> {
-		const uploadFile = `${path}/uploads/${folder}`
+		let finalFolder = typeof folder === 'string' ? folder : 'default'
+		const uploadFile = `${path}/uploads/${finalFolder}`
 		await ensureDir(uploadFile)
 
 		const res: IFileResponse[] = await Promise.all(
@@ -17,7 +18,7 @@ export class FileService {
 				const url = `${uploadFile}/${file.originalname}`
 				await writeFile(url, file.buffer)
 				return {
-					url: `/uploads/${folder}/${file.originalname}`,
+					url: `/uploads/${finalFolder}/${file.originalname}`,
 					name: file.originalname,
 				}
 			})
