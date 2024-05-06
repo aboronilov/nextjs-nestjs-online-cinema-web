@@ -6,6 +6,7 @@ import { TypegooseModule } from 'nestjs-typegoose'
 import { getMongoDbConfig } from './config/mongo.config'
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UserModule } from './user/user.module';
     }),
     AuthModule,
     UserModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],
