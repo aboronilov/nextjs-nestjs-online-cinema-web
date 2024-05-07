@@ -55,7 +55,6 @@ export class GenreController {
 	@Post()
 	@Auth('admin')
 	@UsePipes(new ValidationPipe())
-	@HttpCode(HttpStatus.OK)
 	async createGenre() {
 		return this.genreService.createGenre()
 	}
