@@ -5,6 +5,7 @@ import { ModelType } from '@typegoose/typegoose/lib/types'
 import { AuthService } from 'src/auth/auth.service'
 import { UpdateUserDTO } from './dto/update-user.dto'
 import { genSalt, hash } from 'bcryptjs'
+import { Types } from 'mongoose'
 
 @Injectable()
 export class UserService {
@@ -74,5 +75,33 @@ export class UserService {
 		await this.userModel.findByIdAndDelete(_id)
 
 		return { message: 'User deleted' }
+	}
+
+	async toggleFavorite(movieId: Types.ObjectId, user: UserModel) {
+		const { _id, favorites } = user
+
+		return await this.userModel.findByIdAndUpdate(
+			_id,
+			{
+				favorites: favorites.includes(movieId)
+					? favorites.filter((item) => item.toString() !== movieId.toString())
+					: [...favorites, movieId],
+			},
+			{ new: true }
+		)
+	}
+
+	async getFavorites(_id: Types.ObjectId) {
+		return await this.userModel
+			.findById(_id, 'favorites')
+			.populate({
+				path: 'favorites',
+				populate: {
+					path: 'genres',
+					select: '-__v -createdAt -updatedAt',
+				},
+			})
+			.exec()
+			.then((data) => data.favorites)
 	}
 }
