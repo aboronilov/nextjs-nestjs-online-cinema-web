@@ -15,7 +15,7 @@ import { UserService } from './user.service'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { User } from './decorators/user.decorator'
 import { UpdateUserDTO } from './dto/update-user.dto'
-import { IdValidationPipe } from 'src/pipes/id.validation.pipe'
+import { IdValidationPipe } from 'lib/pipes/id.validation.pipe'
 import { Types } from 'mongoose'
 import { UserModel } from './models/user.model'
 

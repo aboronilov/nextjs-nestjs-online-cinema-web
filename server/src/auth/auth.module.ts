@@ -5,7 +5,7 @@ import { TypegooseModule } from 'nestjs-typegoose'
 import { UserModel } from 'src/user/models/user.model'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { JwtModule } from '@nestjs/jwt'
-import { getJwtConfig } from 'src/config/jwt.config'
+import { getJwtConfig } from 'lib/config/jwt.config'
 import { JwtStrategy } from './strategies/jwt.strategy'
 
 @Module({
