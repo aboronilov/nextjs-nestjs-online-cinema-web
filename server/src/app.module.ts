@@ -10,7 +10,7 @@ import { FileModule } from './file/file.module'
 import { GenreModule } from './genre/genre.module'
 import { ActorModule } from './actor/actor.module'
 import { MovieModule } from './movie/movie.module'
-import { RatingModule } from './rating/rating.module';
+import { RatingModule } from './rating/rating.module'
 
 @Module({
 	imports: [
