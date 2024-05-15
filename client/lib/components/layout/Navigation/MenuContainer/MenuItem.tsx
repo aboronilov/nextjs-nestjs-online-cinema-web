@@ -6,7 +6,7 @@ import styles from "./Menu.module.scss"
 import { IMenuItem } from "./menu.interface"
 import cn from "classnames"
 import Link from "next/link"
-import MaterialIcon from "@/components/ui/MaterialIcon"
+import MaterialIcon from "../../../ui/MaterialIcon"
 
 const MenuItem: FC<{ item: IMenuItem }> = ({ item }) => {
   const pathname = usePathname()

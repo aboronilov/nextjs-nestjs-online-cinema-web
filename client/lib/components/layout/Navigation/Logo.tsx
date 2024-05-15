@@ -6,8 +6,8 @@ import logoImage from "@/assets/images/logo.svg"
 
 const Logo: FC = () => {
   return (
-    <Link href="/">
-      <div className="px-layout mb-10 block">
+    <Link href="/" legacyBehavior>
+      <a>
         <Image
           src={logoImage}
           width={247}
@@ -15,7 +15,7 @@ const Logo: FC = () => {
           alt="logo"
           draggable={false}
         />
-      </div>
+      </a>
     </Link>
   )
 }

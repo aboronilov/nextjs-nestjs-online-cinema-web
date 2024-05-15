@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { IHome } from "./home.interface"
-import Layout from "@/components/layout/Layout"
+import Layout from "../../layout/Layout"
 
 const Home: FC<IHome> = () => {
   return (

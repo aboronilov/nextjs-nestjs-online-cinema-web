@@ -6,7 +6,10 @@ import MenuContainer from "./MenuContainer/MenuContainer"
 const Navigation: FC = () => {
   return (
     <div className={styles.navigation}>
-      <Logo />
+      <div className="px-layout mb-10 block">
+        <Logo />
+      </div>
+
       <MenuContainer />
     </div>
   )
