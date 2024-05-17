@@ -17,21 +17,29 @@
         "name": "next"
       }
     ],
-    "baseUrl": "./app/",
+    // "baseUrl": "./app/",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/ui/*": ["components/ui/*"],
-      "@/screens/*": ["components/screens/*"],
+      "@/components/*": ["./app/components/*"],
+      "@/ui/*": ["./app/components/ui/*"],
+      "@/screens/*": ["./app/components/screens/*"],
 
-      "@/assets/*": ["assets/*"],
-      "@/config/*": ["config/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/services/*": ["services/*"],
-      "@/shared/*": ["shared/*"],
-      "@/store/*": ["store/*"],
-      "@/utils/*": ["utils/*"],
+      "@/assets/*": ["./lib/assets/*"],
+      "@/config/*": ["./lib/config/*"],
+      "@/hooks/*": ["./lib/hooks/*"],
+      "@/services/*": ["./lib/services/*"],
+      "@/shared/*": ["./lib/shared/*"],
+      "@/store/*": ["./lib/store/*"],
+      "@/utils/*": ["./lib/utils/*"],
+      "@/api/*": ["./lib/api/*"],
+      "@/providers/*": ["./lib/providers/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pretttier.config.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "pretttier.config.js"
+  ],
   "exclude": ["node_modules"]
 }

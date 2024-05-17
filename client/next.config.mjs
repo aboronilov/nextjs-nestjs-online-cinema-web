@@ -3,7 +3,7 @@ const nextConfig = {
   poweredByHeader: false,
   optimizeFonts: false,
   env: {
-    APP_SERVER_URL: process.env.REACT_APP_SERVER_URL,
+    API_URL: "https://nextjs-nestjs-online-cinema-web.onrender.com",
   },
 }
 
