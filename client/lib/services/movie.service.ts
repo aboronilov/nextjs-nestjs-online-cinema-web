@@ -12,4 +12,8 @@ export const MovieService = {
         : {},
     })
   },
+
+  async getMostPopularMovies() {
+    return axiosClassic.get<IMovie[]>(getMovieUrl("most-popular"))
+  },
 }
