@@ -1,4 +1,3 @@
-import Link from "next/link"
 import type { Metadata } from "next"
 import Heading from "./components/ui/heading/Heading"
 import Layout from "./components/layout/Layout"
