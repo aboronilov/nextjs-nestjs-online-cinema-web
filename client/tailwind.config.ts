@@ -1,8 +1,8 @@
-import type { Config } from "tailwindcss";
-import colors from "tailwindcss/colors";
-import plugin from "tailwindcss/plugin";
+import type { Config } from "tailwindcss"
+import colors from "tailwindcss/colors"
+import plugin from "tailwindcss/plugin"
 
-const primary = "#E30B13";
+const primary = "#E30B13"
 
 const config: Config = {
   content: [
@@ -77,58 +77,9 @@ const config: Config = {
       },
     },
   },
-  // plugins: [
-  //   plugin(({ addComponents, addUtilities, theme }) => {
-  //     addComponents({
-  //       ".btn-primary": {
-  //         backgroundColor: theme("colors.primary"),
-  //         color: theme("colors.white"),
-  //         borderRadius: "0.65rem",
-  //         transition: "background-color .3s ease-in-out",
-  //         "&:hover": {
-  //           backgroundColor: "#FF0009",
-  //         },
-  //       },
-  //       ".text-link": {
-  //         textUnderlineOffset: "4",
-  //         color: "rgba(255, 255, 255, .9)",
-  //         transition: "text-decoration-color .3s ease-in-out",
-  //         textDecorationLine: "underline",
-  //         textDecorationColor: "rgba(255, 255, 255, .2)",
-  //         "&:hover": {
-  //           color: "rgba(255, 255, 255, .9)",
-  //         },
-  //       },
-  //       ".air-block": {
-  //         borderRadius: theme("borderRadius.layout"),
-  //         backgroundColor: theme("colors.gray.950"),
-  //         color: theme("colors.white"),
-  //         boxShadow: theme("boxShadow.lg"),
-  //       },
-  //     }),
-  //       addUtilities({
-  //         ".text-shadow": {
-  //           textShadow: "1px 1px rgba(0, 0, 0, 0.4)",
-  //         },
-  //         ".outline-border-none": {
-  //           outline: "none",
-  //           border: "none",
-  //         },
-  //         "flex-center-between": {
-  //           display: "flex",
-  //           alignItems: "center",
-  //           justifyContent: "space-between",
-  //         },
-  //         "image-like-bg": {
-  //           objectPosition: 'center',
-  //           objectFit: 'cover',
-  //           pointerEvents: 'none'
-  //         },
-  //       }),
-  //       theme({}),
-  //   }),
-  // ],
   plugins: [
+    require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/forms"),
     plugin(({ addComponents, addUtilities, theme }) => {
       addComponents({
         ".btn-primary": {
@@ -175,8 +126,8 @@ const config: Config = {
             objectFit: "cover",
             pointerEvents: "none",
           },
-        });
+        })
     }),
   ],
-};
-export default config;
+}
+export default config
