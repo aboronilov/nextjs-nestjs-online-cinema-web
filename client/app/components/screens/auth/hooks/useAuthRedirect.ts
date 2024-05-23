@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter, useParams } from "next/navigation"
-import { useAuth } from "./useAuth"
+import { useAuth } from "../../../../../lib/hooks/useAuth"
 import { useEffect } from "react"
 
 export const useAuthRedirect = () => {

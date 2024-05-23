@@ -2,15 +2,16 @@
 
 import { FC, useState } from "react"
 import { useAuthRedirect } from "./hooks/useAuthRedirect"
-import { useAuth } from "./hooks/useAuth"
+import { useAuth } from "@/hooks/useAuth"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { IAuthInput } from "./interfaces/auth.interface"
+import { IEmailPassword } from "@/shared/types/user.types"
 import styles from "./Auth.module.scss"
 import { Metadata } from "next"
 import Heading from "@/components/ui/heading/Heading"
 import Button from "@/components/ui/form-elements/Button"
 import Layout from "@/components/layout/Layout"
 import AuthFields from "./AuthFields/AuthFields"
+import { useActions } from "@/hooks/useActions"
 
 export const metadata: Metadata = {
   title: "Auth",
@@ -28,18 +29,13 @@ const Auth: FC = () => {
     handleSubmit,
     formState,
     reset,
-  } = useForm<IAuthInput>({
+  } = useForm<IEmailPassword>({
     mode: "onChange",
   })
 
-  const login = ({ email, password }: IAuthInput) => {
-    console.log(`email: ${email}, password: ${password}`)
-  }
-  const register = ({ email, password }: IAuthInput) => {
-    console.log(`email: ${email}, password: ${password}`)
-  }
+  const { register, login } = useActions()
 
-  const onSubmit: SubmitHandler<IAuthInput> = ({ email, password }) => {
+  const onSubmit: SubmitHandler<IEmailPassword> = ({ email, password }) => {
     if (type === "login") {
       login({ email, password })
     } else {

@@ -18,7 +18,7 @@ const ReduxToast: FC = () => {
       newestOnTop={false}
       preventDuplicates
       progressBar
-      closeOnToastrClick
+      closeOnToastrClick={false}
       timeOut={4000}
       transitionIn="fadeIn"
       transitionOut="fadeOut"
