@@ -51,15 +51,17 @@ export const AuthService = {
       { headers: getContentType() }
     )
 
-    if (response.data.accessToken) {
+    if (response.data.accessToken && refreshToken) {
       const data = {
         ...user,
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
       }
       saveToLocalStorage(data)
+
+      return data
     }
 
-    return user
+    return null
   },
 }
