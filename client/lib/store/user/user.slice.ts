@@ -42,7 +42,7 @@ export const userSlice = createSlice({
       })
       .addCase(checkAuth.fulfilled, (state, { payload }) => {
         state.isLoading = false
-        state.user = payload
+        state.user = payload.user
       })
   },
 })

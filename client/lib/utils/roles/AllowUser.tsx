@@ -12,8 +12,11 @@ const AllowUser = ({
   const { user } = useAuth()
 
   useLayoutEffect(() => {
-    if (user && !user.isAdmin) {
+    if (!user) {
       redirect("/auth")
+    }
+    if (user?.isAdmin) {
+      redirect("/")
     }
   }, [])
 
