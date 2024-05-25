@@ -6,7 +6,9 @@ import { Provider } from "react-redux"
 import { store } from "@/store/store"
 import NextTopLoader from "nextjs-toploader"
 import { accentColor } from "@/config/constants"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
+import AuthProvider from "./AuthProvider/AuthProvider"
+import { TypeComponentAuthFields } from "@/shared/types/auth.types"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +35,7 @@ const MainProvider = ({ children }: { children: React.ReactNode }) => {
         <NextTopLoader color={accentColor} />
         <ReduxToast />
         {children}
+        {/* <AuthProvider Component={Component}></AuthProvider> */}
       </QueryClientProvider>
     </Provider>
   )
