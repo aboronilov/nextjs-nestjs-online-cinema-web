@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 }
 
 const Auth: FC = () => {
-  useAuthRedirect()
+  // useAuthRedirect()
 
   const { isLoading } = useAuth()
   const [type, setType] = useState<"register" | "login">("login")

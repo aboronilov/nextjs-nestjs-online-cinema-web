@@ -116,12 +116,12 @@ const config: Config = {
             outline: "none",
             border: "none",
           },
-          "flex-center-between": {
+          ".flex-center-between": {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           },
-          "image-like-bg": {
+          ".image-like-bg": {
             objectPosition: "center",
             objectFit: "cover",
             pointerEvents: "none",
