@@ -37,6 +37,7 @@ export const AuthService = {
 
     return response.data
   },
+
   async logout() {
     clearStorage()
   },
@@ -51,15 +52,20 @@ export const AuthService = {
       { headers: getContentType() }
     )
 
-    if (response.data.accessToken && refreshToken) {
+    if (response.data.accessToken && response.data.refreshToken && user) {
+      const { accessToken, refreshToken } = response.data
       const data = {
-        ...user,
-        accessToken: response.data.accessToken,
-        refreshToken: response.data.refreshToken,
+        user,
+        accessToken,
+        refreshToken,
       }
       saveToLocalStorage(data)
 
-      return data
+      return {
+        ...user,
+        accessToken,
+        refreshToken,
+      }
     }
 
     return null

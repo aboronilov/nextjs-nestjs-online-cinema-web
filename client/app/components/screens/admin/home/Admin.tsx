@@ -5,7 +5,7 @@ import Statistics from "./Statistics/Statistics"
 const Admin: FC = () => {
   return (
     <>
-      {/* <Heading title="Statistics" /> */}
+      <Heading title="Statistics" />
       <Statistics />
     </>
   )

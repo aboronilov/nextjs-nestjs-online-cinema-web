@@ -5,22 +5,14 @@ import AllowAdmin from "@/utils/roles/AllowAdmin"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Boronilov Cinema | Admin panel",
+  title: "Boronilov Cinema | Users",
   description: "Costomize app",
 }
 
-export default function ManageLayout({
+export default function ManageUsersLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <AllowAdmin>
-      <Layout>
-        <AdminNavigation />
-        {/* <Heading title="Statistics" /> */}
-        {children}
-      </Layout>
-    </AllowAdmin>
-  )
+  return <>{children}</>
 }

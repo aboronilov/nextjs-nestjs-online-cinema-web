@@ -1,8 +1,9 @@
+import UserList from "@/components/screens/admin/users/UserList"
 import { NextPage } from "next"
 import React from "react"
 
 const UserPage: NextPage = () => {
-  return <div>UserPage</div>
+  return <UserList />
 }
 
 export default UserPage

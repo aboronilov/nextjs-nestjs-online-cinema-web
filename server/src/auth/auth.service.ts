@@ -98,7 +98,7 @@ export class AuthService {
 
 		const user = await this.userModel.findById(result._id)
 		if (!user) {
-			throw new UnauthorizedException('Invalid token or expired')
+			throw new UnauthorizedException('jwt expired')
 		}
 
 		return await this.createTokenPair(user._id.toString())
