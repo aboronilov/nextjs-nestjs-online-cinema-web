@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Boronilov Cinema | Users",
+  title: "Boronilov Cinema | Actors",
   description: "Costomize app",
 }
 
-export default function ManageUsersLayout({
+export default function ManageActorsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

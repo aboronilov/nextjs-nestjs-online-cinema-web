@@ -8,17 +8,21 @@ import styles from "../Admin.module.scss"
 import SkeletonLoader from "@/components/ui/SkeletonLoader"
 
 const CountUsers: FC = () => {
-  const { isLoading, data } = useQuery("Count users", () =>
-    AdminService.getCountUsers()
+  const { isLoading, data } = useQuery(
+    "Count users",
+    () => AdminService.getCountUsers(),
+    {
+      select: ({ data }) => data,
+    }
   )
+
+  // if (true) {
+  //   return <SkeletonLoader className="h-5" />
+  // }
 
   return (
     <div className={cn(styles.block, styles.countUsers)}>
-      {isLoading ? (
-        <SkeletonLoader />
-      ) : (
-        <div className={styles.number}>{data?.data}</div>
-      )}
+      {isLoading ? <div>...</div> : <div className={styles.number}>{data}</div>}
       <div className={styles.description}>users</div>
     </div>
   )

@@ -1,6 +1,5 @@
 import { axiosClassic } from "@/api/interceptors"
 import { getAuthUrl } from "@/config/api.config"
-import { IEmailPassword } from "@/shared/types/user.types"
 import { IAuthResponse, ITokens } from "@/store/user/user.interface"
 import {
   clearStorage,
