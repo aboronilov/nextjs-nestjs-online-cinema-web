@@ -2,7 +2,7 @@
 
 import { SubmitHandler, UseFormSetValue } from "react-hook-form"
 import { IGenreEditInput } from "./genre-edit.interface"
-import { useRouter } from "next/router"
+import { useRouter, useParams } from "next/navigation"
 import { useMutation, useQuery } from "react-query"
 import { GenreService } from "@/services/genre.service"
 import { toastErrors } from "@/utils/toast-error/toastErrors"
@@ -11,8 +11,9 @@ import { toastr } from "react-redux-toastr"
 import { getAdminUrl } from "@/config/url.config"
 
 export const useEditGenre = (setValue: UseFormSetValue<IGenreEditInput>) => {
-  const { push, query } = useRouter()
-  const genreId = String(query.id)
+  const router = useRouter()
+  const params = useParams()
+  const genreId = String(params.id)
 
   const { isLoading } = useQuery(
     ["Edit genre from admin", genreId],
@@ -40,7 +41,7 @@ export const useEditGenre = (setValue: UseFormSetValue<IGenreEditInput>) => {
       },
       onSuccess: () => {
         toastr.success("Genre updated successfully", "Genre edit")
-        push(getAdminUrl("genres"))
+        router.push(getAdminUrl("genres"))
       },
     }
   )

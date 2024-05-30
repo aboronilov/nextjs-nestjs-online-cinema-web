@@ -1,11 +1,16 @@
 "use client"
 
 import { FC } from "react"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { IGenreEditInput } from "./genre-edit.interface"
 import { useEditGenre } from "./useEditGenre"
-import SkeletonLoader from "@/components/ui/SkeletonLoader"
-import Field from "@/components/ui/form-elements/Field"
+import SkeletonLoader from "@/ui/SkeletonLoader"
+import Field from "@/ui/form-elements/Field"
+import SlugField from "@/ui/form-elements/SlugField/SlugField"
+import Button from "@/ui/form-elements/Button"
+import formStyles from "@/ui/form-elements/admin-form.module.scss"
+import TextEditor from "@/ui/form-elements/TextEditor"
+import { stripHtml } from "string-strip-html"
 
 const GenreEdit: FC = () => {
   const {
@@ -14,18 +19,21 @@ const GenreEdit: FC = () => {
     register,
     setValue,
     getValues,
+    trigger,
+    control,
   } = useForm<IGenreEditInput>({
     mode: "onChange",
   })
 
   const { isLoading, onSubmit } = useEditGenre(setValue)
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={formStyles.form}>
       {isLoading ? (
         <SkeletonLoader count={3} />
       ) : (
         <>
-          <div>
+          <div className={formStyles.fields}>
             <Field
               {...register("name", { required: "Name is required" })}
               placeholder="Name"
@@ -33,7 +41,19 @@ const GenreEdit: FC = () => {
               style={{ width: "31%" }}
             />
 
-            <div style={{ width: "31%" }}>{/* SLUG */}</div>
+            <div style={{ width: "31%" }}>
+              <SlugField
+                error={errors.slug}
+                register={register}
+                generate={() => {
+                  setValue(
+                    "slug",
+                    getValues("name").toLowerCase().replace(/\s/g, "-")
+                  )
+                  trigger("slug")
+                }}
+              />
+            </div>
 
             <Field
               {...register("icon", { required: "Icon is required" })}
@@ -41,10 +61,30 @@ const GenreEdit: FC = () => {
               error={errors.icon}
               style={{ width: "31%" }}
             />
-
-            {/* Text editor draft JS */}
-            <button>Update</button>
           </div>
+
+          <Controller
+            control={control}
+            name="description"
+            defaultValue={getValues("description")}
+            render={({ field: { value, onChange }, fieldState: { error } }) => (
+              <TextEditor
+                onChange={onChange}
+                placeholder="Description"
+                value={value}
+                error={error}
+              />
+            )}
+            rules={{
+              validate: {
+                required: (v) =>
+                  (v && stripHtml(v).result.length > 0) ||
+                  "Description is required",
+              },
+            }}
+          />
+
+          <Button>Update</Button>
         </>
       )}
     </form>

@@ -15,14 +15,14 @@ export const GenreService = {
   },
 
   async getById(_id: string) {
-    return instance.get<IGenre>(getGenresUrl(`${_id}`))
+    return instance.get<IGenre>(getGenresUrl(`/${_id}`))
   },
 
   async deleteGenre(_id: string) {
-    return instance.delete<{ [key: string]: string }>(getGenresUrl(`${_id}`))
+    return instance.delete<{ [key: string]: string }>(getGenresUrl(`/${_id}`))
   },
 
   async updateGenre(_id: string, data: IGenreEditInput) {
-    return instance.patch<IGenre>(getGenresUrl(`${_id}`), data)
+    return instance.patch<IGenre>(getGenresUrl(`/${_id}`), data)
   },
 }

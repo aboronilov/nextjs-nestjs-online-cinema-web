@@ -1,9 +1,9 @@
-import GenresList from "@/components/screens/admin/genres/GenresList"
+import GenreEdit from "@/components/screens/admin/genres/edit/GenreEdit"
 import { NextPage } from "next"
 import React from "react"
 
 const GenresEditPage: NextPage = () => {
-  return <GenresList />
+  return <GenreEdit />
 }
 
 export default GenresEditPage

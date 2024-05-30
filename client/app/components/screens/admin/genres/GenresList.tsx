@@ -12,6 +12,8 @@ const GenresList: FC = () => {
 
   const tableItems = data ? (data as unknown as ITableItem[]) : []
 
+  console.log(tableItems)
+
   return (
     <>
       <Heading title="Genres" />

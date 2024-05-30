@@ -4,7 +4,6 @@ import { ITableItem } from "@/components/ui/admin-table/AdminTable/admin-table.i
 import { getAdminUrl } from "@/config/url.config"
 import { useDebounce } from "@/hooks/useDebounce"
 import { GenreService } from "@/services/genre.service"
-import { convertMongoDBDate } from "@/utils/dates/convertMongoDBDate"
 import { toastErrors } from "@/utils/toast-error/toastErrors"
 import { ChangeEvent, useMemo, useState } from "react"
 import { useMutation, useQuery } from "react-query"
@@ -24,7 +23,7 @@ export const useGenres = () => {
           (item) =>
             ({
               _id: item._id,
-              editUrl: getAdminUrl(`genre/edit/${item._id}`),
+              editUrl: getAdminUrl(`genres/${item._id}/edit`),
               items: [item.name, item.slug],
             }) as unknown as ITableItem[]
         ),
@@ -36,7 +35,7 @@ export const useGenres = () => {
 
   const { mutateAsync: deleteAsync } = useMutation(
     "Delete Genre for admin panel",
-    (GenreId: string) => GenreService.deleteGenre(GenreId),
+    (genreId: string) => GenreService.deleteGenre(genreId),
     {
       onError: (error) => {
         toastErrors(error, "Genre delete")
