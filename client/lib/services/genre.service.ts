@@ -18,6 +18,10 @@ export const GenreService = {
     return instance.get<IGenre>(getGenresUrl(`/${_id}`))
   },
 
+  async createGenre() {
+    return instance.post<string>(getGenresUrl(`/`))
+  },
+
   async deleteGenre(_id: string) {
     return instance.delete<{ [key: string]: string }>(getGenresUrl(`/${_id}`))
   },

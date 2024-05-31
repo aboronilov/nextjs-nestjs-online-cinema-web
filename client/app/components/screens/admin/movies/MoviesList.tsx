@@ -8,14 +8,25 @@ import AdminTable from "@/components/ui/admin-table/AdminTable/AdminTable"
 import { ITableItem } from "@/components/ui/admin-table/AdminTable/admin-table.interface"
 
 const MoviesList: FC = () => {
-  const { isLoading, handleSearch, searchTerm, data, deleteAsync } = useMovies()
+  const {
+    isLoading,
+    handleSearch,
+    searchTerm,
+    data,
+    deleteAsync,
+    createAsync,
+  } = useMovies()
 
   const tableItems = data ? (data as unknown as ITableItem[]) : []
 
   return (
     <>
       <Heading title="Movies" />
-      <AdminHeader searchTerm={searchTerm} handeSearch={handleSearch} />
+      <AdminHeader
+        searchTerm={searchTerm}
+        handeSearch={handleSearch}
+        onClick={createAsync}
+      />
       <AdminTable
         isLoading={isLoading}
         tableItems={tableItems}

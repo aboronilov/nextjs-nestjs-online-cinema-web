@@ -6,6 +6,7 @@ import { useDebounce } from "@/hooks/useDebounce"
 import { MovieService } from "@/services/movie.service"
 import { getGenresList } from "@/utils/movie/getGenresListEach"
 import { toastErrors } from "@/utils/toast-error/toastErrors"
+import { useRouter } from "next/navigation"
 import { ChangeEvent, useMemo, useState } from "react"
 import { useMutation, useQuery } from "react-query"
 import { toastr } from "react-redux-toastr"
@@ -14,6 +15,8 @@ export const useMovies = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   const debouncedSearch = useDebounce(searchTerm, 500)
+
+  const router = useRouter()
 
   const queryData = useQuery(
     ["Movies list for admin panel", debouncedSearch],
@@ -34,6 +37,20 @@ export const useMovies = () => {
         ),
       onError: (error) => {
         toastErrors(error, "Movie list")
+      },
+    }
+  )
+
+  const { mutateAsync: createAsync } = useMutation(
+    "Create Movie for admin panel",
+    () => MovieService.create(),
+    {
+      onError: (error) => {
+        toastErrors(error, "Movie Create")
+      },
+      onSuccess: ({ data: _id }) => {
+        toastr.success("Movie created successfully", "Movie create")
+        router.push(getAdminUrl(`movies/${_id}/edit`))
       },
     }
   )
@@ -62,7 +79,8 @@ export const useMovies = () => {
       ...queryData,
       searchTerm,
       deleteAsync,
+      createAsync,
     }),
-    [queryData, searchTerm, deleteAsync]
+    [queryData, searchTerm, deleteAsync, createAsync]
   )
 }

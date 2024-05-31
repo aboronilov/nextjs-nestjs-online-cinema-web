@@ -5,6 +5,7 @@ import { getAdminUrl } from "@/config/url.config"
 import { useDebounce } from "@/hooks/useDebounce"
 import { GenreService } from "@/services/genre.service"
 import { toastErrors } from "@/utils/toast-error/toastErrors"
+import { useRouter } from "next/navigation"
 import { ChangeEvent, useMemo, useState } from "react"
 import { useMutation, useQuery } from "react-query"
 import { toastr } from "react-redux-toastr"
@@ -13,6 +14,8 @@ export const useGenres = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   const debouncedSearch = useDebounce(searchTerm, 500)
+
+  const router = useRouter()
 
   const queryData = useQuery(
     ["Genres list for admin panel", debouncedSearch],
@@ -47,6 +50,20 @@ export const useGenres = () => {
     }
   )
 
+  const { mutateAsync: createAsync } = useMutation(
+    "Create Genre for admin panel",
+    () => GenreService.createGenre(),
+    {
+      onError: (error) => {
+        toastErrors(error, "Genre Create")
+      },
+      onSuccess: ({ data: _id }) => {
+        toastr.success("Genre created successfully", "Genre create")
+        router.push(getAdminUrl(`genres/${_id}/edit`))
+      },
+    }
+  )
+
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
   }
@@ -57,7 +74,8 @@ export const useGenres = () => {
       ...queryData,
       searchTerm,
       deleteAsync,
+      createAsync,
     }),
-    [queryData, searchTerm, deleteAsync]
+    [queryData, searchTerm, deleteAsync, createAsync]
   )
 }

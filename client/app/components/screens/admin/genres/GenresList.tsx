@@ -8,16 +8,25 @@ import AdminTable from "@/components/ui/admin-table/AdminTable/AdminTable"
 import { ITableItem } from "@/components/ui/admin-table/AdminTable/admin-table.interface"
 
 const GenresList: FC = () => {
-  const { isLoading, handleSearch, searchTerm, data, deleteAsync } = useGenres()
+  const {
+    isLoading,
+    handleSearch,
+    searchTerm,
+    data,
+    deleteAsync,
+    createAsync,
+  } = useGenres()
 
   const tableItems = data ? (data as unknown as ITableItem[]) : []
-
-  console.log(tableItems)
 
   return (
     <>
       <Heading title="Genres" />
-      <AdminHeader searchTerm={searchTerm} handeSearch={handleSearch} />
+      <AdminHeader
+        searchTerm={searchTerm}
+        handeSearch={handleSearch}
+        onClick={createAsync}
+      />
       <AdminTable
         isLoading={isLoading}
         tableItems={tableItems}
