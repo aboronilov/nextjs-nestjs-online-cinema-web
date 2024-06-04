@@ -59,8 +59,6 @@ export class GenreService {
 					item._id,
 				])
 
-				// console.log(moviesByGenre)
-
 				const image =
 					moviesByGenre.length > 0 ? moviesByGenre[0].bigPoster : 'empty'
 

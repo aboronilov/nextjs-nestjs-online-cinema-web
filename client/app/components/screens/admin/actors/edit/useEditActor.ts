@@ -21,9 +21,11 @@ export const useEditActor = (setValue: UseFormSetValue<IActorEditInput>) => {
     {
       select: ({ data }) => data as IActorEditInput,
       onSuccess: (data) => {
-        getKeys(data).forEach((item) => {
-          setValue(item, data[item])
-        })
+        setValue("bio", data.bio)
+        setValue("countMovies", data.countMovies)
+        setValue("name", data.name)
+        setValue("photo", data.photo)
+        setValue("slug", data.slug)
       },
       onError: (error) => {
         toastErrors(error, "Actor edit")
@@ -50,5 +52,5 @@ export const useEditActor = (setValue: UseFormSetValue<IActorEditInput>) => {
     await mutateAsync(data)
   }
 
-  return { isLoading, onSubmit }
+  return { isLoading, onSubmit, actorId }
 }

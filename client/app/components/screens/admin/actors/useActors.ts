@@ -26,26 +26,12 @@ export const useActors = () => {
           (item) =>
             ({
               _id: item._id,
-              editUrl: getAdminUrl(`actor/edit/${item._id}`),
+              editUrl: getAdminUrl(`actors/${item._id}/edit`),
               items: [item.name, String(item.countMovies)],
             }) as unknown as ITableItem[]
         ),
       onError: (error) => {
         toastErrors(error, "Actor list")
-      },
-    }
-  )
-
-  const { mutateAsync: createAsync } = useMutation(
-    "Create Actor for admin panel",
-    () => ActorService.create(),
-    {
-      onError: (error) => {
-        toastErrors(error, "Actor Create")
-      },
-      onSuccess: ({ data: _id }) => {
-        toastr.success("Actor created successfully", "Actor create")
-        router.push(getAdminUrl(`actors/${_id}/edit`))
       },
     }
   )
@@ -60,6 +46,20 @@ export const useActors = () => {
       onSuccess: (data) => {
         toastr.success("Actor deleted successfully", "Actor delete")
         queryData.refetch()
+      },
+    }
+  )
+
+  const { mutateAsync: createAsync } = useMutation(
+    "Create Actor for admin panel",
+    () => ActorService.create(),
+    {
+      onError: (error) => {
+        toastErrors(error, "Actor Create")
+      },
+      onSuccess: ({ data: _id }) => {
+        toastr.success("Actor created successfully", "Actor create")
+        router.push(getAdminUrl(`actors/${_id}/edit`))
       },
     }
   )

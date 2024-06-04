@@ -15,7 +15,7 @@ export const ActorService = {
   },
 
   async getById(_id: string) {
-    return instance.get<IActor>(getActorUrl(``))
+    return instance.get<IActor>(getActorUrl(`${_id}`))
   },
 
   async create() {

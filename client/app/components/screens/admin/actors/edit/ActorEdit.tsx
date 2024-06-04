@@ -11,6 +11,7 @@ import Button from "@/ui/form-elements/Button"
 import formStyles from "@/ui/form-elements/admin-form.module.scss"
 import TextEditor from "@/ui/form-elements/TextEditor"
 import { stripHtml } from "string-strip-html"
+import UploadField from "@/components/ui/form-elements/UploadField/UploadField"
 
 const ActorEdit: FC = () => {
   const {
@@ -25,7 +26,7 @@ const ActorEdit: FC = () => {
     mode: "onChange",
   })
 
-  const { isLoading, onSubmit } = useEditActor(setValue)
+  const { isLoading, onSubmit, actorId } = useEditActor(setValue)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={formStyles.form}>
@@ -54,37 +55,49 @@ const ActorEdit: FC = () => {
               />
             </div>
 
-            {/* <Controller
-            control={control}
-            name="photo"
-            defaultValue={getValues("photo")}
-            render={({ field: { value, onChange }, fieldState: { error } }) => (
-                // upload photo
-            )}
-            rules={{
-              required: "Photo is required"
-            }}
-          />
+            <Controller
+              control={control}
+              name="photo"
+              defaultValue={getValues("photo")}
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <UploadField
+                  onChange={onChange}
+                  value={value}
+                  error={error}
+                  folder="actors"
+                  placeholder="photo"
+                />
+              )}
+              rules={{
+                required: "Photo is required",
+              }}
+            />
 
-          <Controller
-            control={control}
-            name="bio"
-            defaultValue={getValues("bio")}
-            render={({ field: { value, onChange }, fieldState: { error } }) => (
-              <TextEditor
-                onChange={onChange}
-                placeholder="Bio"
-                value={value}
-                error={error}
-              />
-            )}
-            rules={{
-              validate: {
-                required: (v) =>
-                  (v && stripHtml(v).result.length > 0) || "Bio is required",
-              },
-            }}
-          /> */}
+            <Controller
+              control={control}
+              name="bio"
+              defaultValue={getValues("bio")}
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <TextEditor
+                  onChange={onChange}
+                  placeholder="Bio"
+                  value={value}
+                  error={error}
+                />
+              )}
+              rules={{
+                validate: {
+                  required: (v) =>
+                    (v && stripHtml(v).result.length > 0) || "Bio is required",
+                },
+              }}
+            />
           </div>
           <Button>Update</Button>
         </>
