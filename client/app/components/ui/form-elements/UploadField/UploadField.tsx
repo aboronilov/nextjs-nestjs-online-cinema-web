@@ -38,7 +38,7 @@ const UploadField: FC<IUploadField> = (props) => {
               value && (
                 <Image
                   alt="image"
-                  src={getAssetUrl(value as string) as string}
+                  src={getAssetUrl(value)}
                   unoptimized
                   width={60}
                   height={60}

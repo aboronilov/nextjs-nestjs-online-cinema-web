@@ -11,6 +11,7 @@ import Button from "@/ui/form-elements/Button"
 import formStyles from "@/ui/form-elements/admin-form.module.scss"
 import TextEditor from "@/ui/form-elements/TextEditor"
 import { stripHtml } from "string-strip-html"
+import UploadField from "@/components/ui/form-elements/UploadField/UploadField"
 
 const MovieEdit: FC = () => {
   const {
@@ -35,9 +36,9 @@ const MovieEdit: FC = () => {
         <>
           <div className={formStyles.fields}>
             <Field
-              {...register("name", { required: "Name is required" })}
-              placeholder="Name"
-              error={errors.name}
+              {...register("title", { required: "Title is required" })}
+              placeholder="Title"
+              error={errors.title}
               style={{ width: "31%" }}
             />
 
@@ -48,7 +49,7 @@ const MovieEdit: FC = () => {
                 generate={() => {
                   setValue(
                     "slug",
-                    getValues("name").toLowerCase().replace(/\s/g, "-")
+                    getValues("title").toLowerCase().replace(/\s/g, "-")
                   )
                   trigger("slug")
                 }}
@@ -56,33 +57,99 @@ const MovieEdit: FC = () => {
             </div>
 
             <Field
-              {...register("icon", { required: "Icon is required" })}
-              placeholder="Icon"
-              error={errors.icon}
+              {...register("parameters.country", {
+                required: "country is required",
+              })}
+              placeholder="Country"
+              error={errors.parameters?.country}
               style={{ width: "31%" }}
             />
-          </div>
 
-          <Controller
-            control={control}
-            name="description"
-            defaultValue={getValues("description")}
-            render={({ field: { value, onChange }, fieldState: { error } }) => (
-              <TextEditor
-                onChange={onChange}
-                placeholder="Description"
-                value={value}
-                error={error}
-              />
-            )}
-            rules={{
-              validate: {
-                required: (v) =>
-                  (v && stripHtml(v).result.length > 0) ||
-                  "Description is required",
-              },
-            }}
-          />
+            <Field
+              {...register("parameters.duration", {
+                required: "duration is required",
+              })}
+              placeholder="Duration"
+              error={errors.parameters?.duration}
+              style={{ width: "31%" }}
+            />
+
+            <Field
+              {...register("parameters.year", {
+                required: "Year is required",
+              })}
+              placeholder="Year"
+              error={errors.parameters?.year}
+              style={{ width: "31%" }}
+            />
+
+            {/* React Select */}
+
+            <Controller
+              control={control}
+              name="poster"
+              defaultValue=""
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <UploadField
+                  onChange={onChange}
+                  value={value}
+                  error={error}
+                  folder={`movies/${getValues("slug")}`}
+                  placeholder="Poster"
+                />
+              )}
+              rules={{
+                required: "poster is required",
+              }}
+            />
+
+            <Controller
+              control={control}
+              name="bigPoster"
+              defaultValue=""
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <UploadField
+                  onChange={onChange}
+                  value={value}
+                  error={error}
+                  folder={`movies/${getValues("slug")}`}
+                  placeholder="Big poster"
+                />
+              )}
+              rules={{
+                required: "Big poster is required",
+              }}
+            />
+
+            <Controller
+              control={control}
+              name="videoUrl"
+              defaultValue=""
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <UploadField
+                  onChange={onChange}
+                  value={value}
+                  error={error}
+                  folder={`movies/${getValues("slug")}`}
+                  placeholder="Video"
+                  isNoImage
+                  style={{ marginTop: -25 }}
+                />
+              )}
+              rules={{
+                required: "Video is required",
+              }}
+            />
+          </div>
 
           <Button>Update</Button>
         </>

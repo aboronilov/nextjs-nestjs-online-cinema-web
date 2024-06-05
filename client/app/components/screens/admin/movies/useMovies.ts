@@ -27,7 +27,7 @@ export const useMovies = () => {
           (item) =>
             ({
               _id: item._id,
-              editUrl: getAdminUrl(`movie/edit/${item._id}`),
+              editUrl: getAdminUrl(`movies/${item._id}/edit`),
               items: [
                 item.title,
                 getGenresList(item.genres),

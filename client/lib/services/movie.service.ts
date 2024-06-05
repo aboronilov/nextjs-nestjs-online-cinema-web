@@ -15,7 +15,7 @@ export const MovieService = {
   },
 
   async getById(_id: string) {
-    return instance.get<IMovie>(getMovieUrl(``))
+    return instance.get<IMovie>(getMovieUrl(`${_id}`))
   },
 
   async create() {
