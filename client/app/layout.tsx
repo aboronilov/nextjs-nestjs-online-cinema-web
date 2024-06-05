@@ -1,5 +1,5 @@
 import MainProvider from "@/providers/MainProvider"
-import "./globals.scss"
+import "@/assets/styles/globals.scss"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { TypeComponentAuthFields } from "@/shared/types/auth.types"

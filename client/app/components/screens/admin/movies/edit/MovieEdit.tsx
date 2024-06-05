@@ -9,9 +9,10 @@ import Field from "@/ui/form-elements/Field"
 import SlugField from "@/ui/form-elements/SlugField/SlugField"
 import Button from "@/ui/form-elements/Button"
 import formStyles from "@/ui/form-elements/admin-form.module.scss"
-import TextEditor from "@/ui/form-elements/TextEditor"
-import { stripHtml } from "string-strip-html"
 import UploadField from "@/components/ui/form-elements/UploadField/UploadField"
+import { useAdminActors } from "./useAdminActors"
+import { useAdminGenres } from "./useAdminGenres"
+import Select from "@/components/ui/select/Select"
 
 const MovieEdit: FC = () => {
   const {
@@ -27,6 +28,8 @@ const MovieEdit: FC = () => {
   })
 
   const { isLoading, onSubmit } = useEditMovie(setValue)
+  const { data: actors, isLoading: isActorsLoading } = useAdminActors()
+  const { data: genres, isLoading: isGenresLoading } = useAdminGenres()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={formStyles.form}>
@@ -87,6 +90,42 @@ const MovieEdit: FC = () => {
 
             <Controller
               control={control}
+              name="genres"
+              render={({ field, fieldState: { error } }) => (
+                <Select
+                  field={field}
+                  options={genres || []}
+                  isLoading={isGenresLoading}
+                  isMulti
+                  placeholder="genres"
+                  error={error}
+                />
+              )}
+              rules={{
+                required: "At least one genre is required",
+              }}
+            />
+
+            <Controller
+              control={control}
+              name="actors"
+              render={({ field, fieldState: { error } }) => (
+                <Select
+                  field={field}
+                  options={actors || []}
+                  isLoading={isActorsLoading}
+                  isMulti
+                  placeholder="actors"
+                  error={error}
+                />
+              )}
+              rules={{
+                required: "At least one Actor is required",
+              }}
+            />
+
+            <Controller
+              control={control}
               name="poster"
               defaultValue=""
               render={({
@@ -101,9 +140,9 @@ const MovieEdit: FC = () => {
                   placeholder="Poster"
                 />
               )}
-              rules={{
-                required: "poster is required",
-              }}
+              // rules={{
+              //   required: "poster is required",
+              // }}
             />
 
             <Controller

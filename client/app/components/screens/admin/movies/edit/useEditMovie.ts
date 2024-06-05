@@ -41,7 +41,7 @@ export const useEditMovie = (setValue: UseFormSetValue<IMovieEditInput>) => {
       },
       onSuccess: () => {
         toastr.success("Movie updated successfully", "Movie edit")
-        router.push(getAdminUrl("Movies"))
+        router.push(getAdminUrl("movies"))
       },
     }
   )
