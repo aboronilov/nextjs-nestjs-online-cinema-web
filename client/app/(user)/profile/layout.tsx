@@ -1,5 +1,7 @@
+import { accentColor } from "@/config/constants"
 import AllowUser from "@/utils/roles/AllowUser"
 import { Metadata } from "next"
+import NextTopLoader from "nextjs-toploader"
 
 export const metadata: Metadata = {
   title: "Boronilov Cinema | Profile",
@@ -11,5 +13,10 @@ export default function ProfileLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <AllowUser>{children}</AllowUser>
+  return (
+    <AllowUser>
+      <NextTopLoader color={accentColor} />
+      {children}
+    </AllowUser>
+  )
 }
