@@ -15,7 +15,7 @@ const SearchList: FC<{ movies: IMovie[] }> = ({ movies }) => {
             <Link key={movie._id} href={getMovieUrl(movie.slug)} legacyBehavior>
               <a>
                 <Image
-                  src={getAssetUrl(movie.poster as string)}
+                  src={getAssetUrl(`/uploads/movies/${movie.slug}/poster.webp`)}
                   width={50}
                   height={50}
                   alt={movie.title}
