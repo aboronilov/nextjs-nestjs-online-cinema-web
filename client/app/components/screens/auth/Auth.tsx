@@ -1,7 +1,6 @@
 "use client"
 
 import { FC, useState } from "react"
-import { useAuthRedirect } from "./hooks/useAuthRedirect"
 import { useAuth } from "@/hooks/useAuth"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { IEmailPassword } from "@/shared/types/user.types"
@@ -12,6 +11,7 @@ import Button from "@/components/ui/form-elements/Button"
 import Layout from "@/components/layout/Layout"
 import AuthFields from "./AuthFields/AuthFields"
 import { useActions } from "@/hooks/useActions"
+import { useRouter } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "Auth",
@@ -19,8 +19,7 @@ export const metadata: Metadata = {
 }
 
 const Auth: FC = () => {
-  // useAuthRedirect()
-
+  const router = useRouter()
   const { isLoading } = useAuth()
   const [type, setType] = useState<"register" | "login">("login")
 
@@ -41,6 +40,7 @@ const Auth: FC = () => {
     } else {
       register({ email, password })
     }
+    router.push("/")
     reset()
   }
 

@@ -5,7 +5,6 @@ import { MovieService } from "@/services/movie.service"
 import { FC } from "react"
 import { useQuery } from "react-query"
 import MovieList from "./MovieList"
-import { IMovie } from "@/shared/types/movie.types"
 
 const PopularMovies: FC = () => {
   const { isLoading, data } = useQuery(

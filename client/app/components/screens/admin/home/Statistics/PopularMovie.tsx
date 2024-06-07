@@ -11,6 +11,7 @@ import SkeletonLoader from "@/components/ui/SkeletonLoader"
 import Link from "next/link"
 import { getMovieUrl } from "@/config/url.config"
 import Image from "next/image"
+import { getAssetUrl } from "@/utils/assets/getUrl"
 
 const PopularMovie: FC = () => {
   const { isLoading, data } = useQuery(
@@ -32,7 +33,7 @@ const PopularMovie: FC = () => {
           <Link legacyBehavior href={getMovieUrl(data?.slug as string)}>
             <a>
               <Image
-                src={data?.bigPoster as string}
+                src={getAssetUrl(data?.bigPoster)}
                 alt={data?.title as string}
                 width={285}
                 height={176}

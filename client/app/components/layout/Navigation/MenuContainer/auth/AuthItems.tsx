@@ -12,13 +12,6 @@ const AuthItems: FC = () => {
   if (user) {
     return (
       <>
-        <MenuItem
-          item={{
-            icon: "MdSettings",
-            link: "/profile",
-            title: "Profile",
-          }}
-        />
         {user.isAdmin ? (
           <MenuItem
             item={{
@@ -27,7 +20,15 @@ const AuthItems: FC = () => {
               title: "Admin",
             }}
           />
-        ) : null}
+        ) : (
+          <MenuItem
+            item={{
+              icon: "MdSettings",
+              link: "/profile",
+              title: "Profile",
+            }}
+          />
+        )}
         <LogoutButton />
       </>
     )

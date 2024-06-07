@@ -6,14 +6,17 @@ import { getGenreUrl, getMovieUrl } from "@/config/url.config"
 import Image from "next/image"
 import { getGenresListEach } from "@/utils/movie/getGenresListEach"
 import MaterialIcon from "@/components/ui/MaterialIcon"
+import { getAssetUrl } from "@/utils/assets/getUrl"
 
 const MovieItem: FC<{ movie: IMovie }> = ({ movie }) => {
+  const poster = `/uploads/movies/${movie.slug}/poster.webp`
+
   return (
     <div className={styles.item}>
       <Link href={getMovieUrl(movie.slug)} legacyBehavior>
         <a>
           <Image
-            src={movie.poster}
+            src={getAssetUrl(poster)}
             width={65}
             height={97}
             alt={movie.title}

@@ -5,6 +5,7 @@ import { AuthService } from "@/services/auth.service"
 import { toastr } from "react-redux-toastr"
 import { toastErrors } from "@/utils/toast-error/toastErrors"
 import { errorCatch } from "@/api/api.helpers"
+import { useRouter } from "next/router"
 
 // Register
 export const register = createAsyncThunk<IAuthResponse, IEmailPassword>(
