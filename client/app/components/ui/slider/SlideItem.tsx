@@ -23,7 +23,7 @@ const SlideItem: FC<ISlideItem> = ({ slide, buttonTitle = "Watch" }) => {
           className="object-cover pointer-events-none object-center"
           alt={slide.title}
           draggable={false}
-          height={160}
+          height={120}
           width={480}
           priority
           objectFit="cover"

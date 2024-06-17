@@ -4,7 +4,7 @@ import Cookies from "js-cookie"
 import { AuthService } from "@/services/auth.service"
 import { clearStorage } from "@/utils/local-storage"
 
-const BASE_URL = process.env.API_URL
+export const BASE_URL = process.env.API_URL
 export const API_URL = `${BASE_URL}/api/`
 
 const axiosClassic = axios.create({
