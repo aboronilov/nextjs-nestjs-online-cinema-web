@@ -29,7 +29,7 @@ async function fetchTrendingMovies() {
   const url = `${removeTrailingSlash(API_URL)}${getMovieUrl("")}`
   const res = await fetch(url, { cache: "force-cache" })
   const movies = (await res.json()) as IMovie[]
-  const randomMovies = getRandomItems(movies, 7) as IMovie[]
+  const randomMovies = getRandomItems(movies, 10) as IMovie[]
 
   const trendingMovies: IGalleryItem[] = randomMovies.map((item) => ({
     name: item.title,
@@ -44,7 +44,7 @@ async function fetchActors() {
   const url = `${removeTrailingSlash(API_URL)}${getActorUrl("")}`
   const res = await fetch(url, { cache: "force-cache" })
   const actorsJson = await res.json()
-  const randomActors = getRandomItems(actorsJson, 7) as IActor[]
+  const randomActors = getRandomItems(actorsJson, 10) as IActor[]
 
   const actors: IGalleryItem[] = randomActors.map((item) => ({
     name: item.name,

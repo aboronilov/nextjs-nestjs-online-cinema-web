@@ -1,12 +1,12 @@
 @import "@/assets/styles/variables";
 
 .gallery {
-  @apply flex items-center overflow-x-auto flex-nowrap py-3;
-  -webkit-overflow-scrolling: touch;
+  @apply flex items-center overflow-x-scroll flex-nowrap py-3;
+  //   -webkit-overflow-scrolling: touch;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  //   &::-webkit-scrollbar {
+  //     display: none;
+  //   }
 
   .item {
     @apply relative transition-transform flex items-end shadow-lg rounded-layout overflow-hidden;
@@ -45,7 +45,7 @@
       }
 
       .subTitle {
-        @apply text-gray-500 text-shadow;
+        @apply bg-yellow-700 text-shadow text-sm;
       }
     }
   }
