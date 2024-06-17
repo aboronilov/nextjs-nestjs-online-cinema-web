@@ -5,3 +5,7 @@ export const textCleaner = (textWithHTML: string): string => {
     allowedTags: [], // Specify allowed tags here if needed
   })
 }
+
+export const removeTrailingSlash = (url: string) => {
+  return url.replace(/\/+$/, "")
+}

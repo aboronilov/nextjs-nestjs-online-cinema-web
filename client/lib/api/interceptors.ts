@@ -5,7 +5,7 @@ import { AuthService } from "@/services/auth.service"
 import { clearStorage } from "@/utils/local-storage"
 
 const BASE_URL = process.env.API_URL
-const API_URL = `${BASE_URL}/api/`
+export const API_URL = `${BASE_URL}/api/`
 
 const axiosClassic = axios.create({
   baseURL: API_URL,
