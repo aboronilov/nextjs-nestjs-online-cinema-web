@@ -51,6 +51,11 @@ export class MovieController {
 		return this.movieService.getMostPopular()
 	}
 
+	@Get('fresh')
+	async getFreshMovies() {
+		return this.movieService.getFreshMovies()
+	}
+
 	@Get(':id')
 	async getMovieById(@Param('id', IdValidationPipe) _id: string) {
 		return this.movieService.getMovieById(_id)

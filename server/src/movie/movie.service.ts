@@ -12,6 +12,18 @@ export class MovieService {
 		private readonly movieModel: ModelType<MovieModel>
 	) {}
 
+	async getFreshMovies() {
+		const movies = await this.movieModel
+			.find()
+			.sort({ 'parametrs.year': -1 })
+			.limit(10)
+		if (!movies) {
+			throw new NotFoundException('movies not found')
+		}
+
+		return movies
+	}
+
 	async getMovieBySlug(slug: string) {
 		const movie = await this.movieModel
 			.findOne({ slug })

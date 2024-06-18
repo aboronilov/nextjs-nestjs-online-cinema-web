@@ -26,7 +26,7 @@ const SlideItem: FC<ISlideItem> = ({ slide, buttonTitle = "Watch" }) => {
           // height={120}
           // width={480}
           fill
-          priority
+          // priority
           objectFit="cover"
         />
       )}
