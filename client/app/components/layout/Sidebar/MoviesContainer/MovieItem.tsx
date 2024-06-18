@@ -21,7 +21,7 @@ const MovieItem: FC<{ movie: IMovie }> = ({ movie }) => {
             height={97}
             alt={movie.title}
             draggable={false}
-            priority
+            // priority
           />
         </a>
       </Link>
