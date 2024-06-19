@@ -3,8 +3,8 @@ import { ICatalog } from "./catalog.interface"
 import Heading from "@/components/ui/heading/Heading"
 import styles from "./Catalog.module.scss"
 import Description from "../heading/Description"
-import GalleryItem from "../gallery/GalleryItem"
 import { getMovieUrl } from "@/config/url.config"
+import GalleryItemFill from "../gallery/GalleryItemFill"
 
 const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
   return (
@@ -17,7 +17,7 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
 
       <section className={styles.movies}>
         {movies.map((item) => (
-          <GalleryItem
+          <GalleryItemFill
             key={item._id}
             item={{
               name: item.title,
@@ -25,7 +25,7 @@ const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
               posterPath: `/uploads/movies/${item.slug}/big-poster.webp`,
               content: {
                 title: item.title,
-                subTitle: item.description,
+                // subTitle: item.description,
               },
             }}
             variant="horizontal"

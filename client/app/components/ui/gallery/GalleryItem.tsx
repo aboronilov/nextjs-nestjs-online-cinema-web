@@ -21,7 +21,8 @@ const GalleryItem: FC<IGalleryItemProps> = ({ item, variant }) => {
           src={getAssetUrl(item.posterPath)}
           draggable={false}
           // priority
-          // width={200}
+          // width={210}
+          // height={70}
           fill
           objectFit="cover"
           objectPosition="top"

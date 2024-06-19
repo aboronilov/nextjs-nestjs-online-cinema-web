@@ -23,7 +23,7 @@ export default function Home({ slides, actors, trendingMovies }: IHome) {
 
       <div className="">
         <SubHeading title="Popular actors" />
-        {trendingMovies.length && <Gallery items={actors} />}
+        {actors.length && <Gallery items={actors} />}
       </div>
     </Layout>
   )

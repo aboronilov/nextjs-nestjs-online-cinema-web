@@ -18,6 +18,10 @@ export const ActorService = {
     return instance.get<IActor>(getActorUrl(`${_id}`))
   },
 
+  async getBySlug(slug: string) {
+    return instance.get<IActor>(getActorUrl(`by-slug/${slug}`))
+  },
+
   async create() {
     return instance.post<string>(getActorUrl(``))
   },

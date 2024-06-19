@@ -14,6 +14,10 @@ export const GenreService = {
     })
   },
 
+  async getBySlug(slug: string) {
+    return axiosClassic.get<IGenre>(getGenresUrl(`/by-slug/${slug}`))
+  },
+
   async getById(_id: string) {
     return instance.get<IGenre>(getGenresUrl(`/${_id}`))
   },

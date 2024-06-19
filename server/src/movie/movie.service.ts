@@ -16,7 +16,7 @@ export class MovieService {
 		const movies = await this.movieModel
 			.find()
 			.sort({ 'parametrs.year': -1 })
-			.limit(10)
+			.limit(9)
 		if (!movies) {
 			throw new NotFoundException('movies not found')
 		}

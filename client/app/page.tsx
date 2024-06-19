@@ -49,7 +49,7 @@ async function fetchActors() {
   const actors: IGalleryItem[] = randomActors.map((item) => ({
     name: item.name,
     posterPath: `/uploads/actors/${item.slug}.webp`,
-    link: getMovieUrl(item.slug),
+    link: getActorUrl(item.slug),
     content: {
       title: item.name,
       subTitle: `+ ${item.countMovies} movies`,

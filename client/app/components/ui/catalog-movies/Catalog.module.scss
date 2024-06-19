@@ -3,10 +3,10 @@
 }
 
 .movies {
-  @apply flex flex-wrap mt-8;
+  @apply mt-8 flex flex-wrap gap-8 justify-items-start;
 
   > a {
-    @apply mr-8 animate-fade;
+    @apply animate-fade h-44;
   }
 
   > a:nth-child(3n) {
