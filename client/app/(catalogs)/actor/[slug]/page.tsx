@@ -42,26 +42,25 @@ const ActorPage: NextPage = () => {
   }
 
   const description = actor ? `${actor.bio}` : `loading...`
+  const imageUrl = `/uploads/actors/${actor?.slug}.webp`
 
-  const galleryItems: IGalleryItem[] = [actor].map((item) => ({
-    name: item?.name as string,
-    posterPath: `/uploads/actors/${item?.slug}.webp`,
-    link: getActorUrl(item?.slug as string),
-    // content: {
-    //   title: item.name,
-    //   subTitle: `+ ${item.countMovies} movies`,
-    // },
-  }))
+  // const galleryItems: IGalleryItem[] = [actor].map((item) => ({
+  //   name: item?.name as string,
+  //   posterPath: `/uploads/actors/${item?.slug}.webp`,
+  //   link: getActorUrl(item?.slug as string),
+  //   // content: {
+  //   //   title: item.name,
+  //   //   subTitle: `+ ${item.countMovies} movies`,
+  //   // },
+  // }))
 
   return (
-    <>
-      <Gallery items={galleryItems} />
-      <Catalog
-        movies={movies || []}
-        title={`${actor?.name}`.toUpperCase() || ""}
-        description={description}
-      />
-    </>
+    <Catalog
+      movies={movies || []}
+      title={`${actor?.name}`.toUpperCase() || ""}
+      description={description}
+      imageUrl={imageUrl}
+    />
   )
 }
 

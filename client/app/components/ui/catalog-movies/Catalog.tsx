@@ -5,15 +5,39 @@ import styles from "./Catalog.module.scss"
 import Description from "../heading/Description"
 import { getMovieUrl } from "@/config/url.config"
 import GalleryItemFill from "../gallery/GalleryItemFill"
+import Image from "next/image"
+import { getAssetUrl } from "@/utils/assets/getUrl"
+import Subheading from "../heading/Subheading"
 
-const Catalog: FC<ICatalog> = ({ movies, title, description }) => {
+const Catalog: FC<ICatalog> = ({ movies, title, description, imageUrl }) => {
   return (
     <>
       <Heading title={title} className={styles.heading} />
 
+      <div className="relative w-[160px] h-[240px]">
+        {imageUrl && (
+          <Image
+            alt={title}
+            src={getAssetUrl(imageUrl)}
+            fill
+            objectFit="cover"
+            // width={300}
+            // height={400}
+          />
+        )}
+      </div>
+
+      <div className="mt-6">
+        <Subheading title="Biography" />
+      </div>
+
       {description && (
         <Description text={description} className={styles.description} />
       )}
+
+      <div className="mt-6">
+        <Subheading title="Filmography" />
+      </div>
 
       <section className={styles.movies}>
         {movies.map((item) => (
