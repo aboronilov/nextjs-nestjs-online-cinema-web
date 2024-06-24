@@ -1,11 +1,9 @@
-// import { NextPageAuth } from "@/shared/types/auth.types"
+import Profile from "@/components/screens/profile/Profile"
 import { NextPage } from "next"
 import React from "react"
 
 const ProfilePage: NextPage = () => {
-  return <div>ProgilePage</div>
+  return <Profile />
 }
-
-// ProfilePage.isOnlyUser = true
 
 export default ProfilePage

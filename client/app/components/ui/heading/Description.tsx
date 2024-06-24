@@ -10,7 +10,7 @@ const Description: FC<{ text: string; className?: string }> = ({
     <div
       className={cn(className, "text-lg font-light text-white text-opacity-60")}
     >
-      {parse(text)}
+      <div className="text-xs">{parse(text)}</div>
     </div>
   )
 }
