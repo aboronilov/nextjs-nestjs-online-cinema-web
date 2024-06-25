@@ -18,6 +18,12 @@ export const MovieService = {
     return instance.get<IMovie>(getMovieUrl(`${_id}`))
   },
 
+  async updateCountOpened(slug: string) {
+    return instance.patch(getMovieUrl("update-count-opened"), {
+      slug,
+    })
+  },
+
   async getBySlug(slug: string) {
     return instance.get<IMovie>(getMovieUrl(`by-slug/${slug}`))
   },
