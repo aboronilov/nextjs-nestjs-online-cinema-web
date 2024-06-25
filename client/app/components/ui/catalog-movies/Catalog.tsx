@@ -14,8 +14,8 @@ const Catalog: FC<ICatalog> = ({ movies, title, description, imageUrl }) => {
     <>
       <Heading title={title} className={styles.heading} />
 
-      <div className="relative w-[160px] h-[240px]">
-        {imageUrl && (
+      {imageUrl && (
+        <div className="relative w-[160px] h-[240px]">
           <Image
             alt={title}
             src={getAssetUrl(imageUrl)}
@@ -24,20 +24,29 @@ const Catalog: FC<ICatalog> = ({ movies, title, description, imageUrl }) => {
             // width={300}
             // height={400}
           />
-        )}
-      </div>
-
-      <div className="mt-6">
-        <Subheading title="Biography" />
-      </div>
-
-      {description && (
-        <Description text={description} className={styles.description} />
+        </div>
       )}
 
-      <div className="mt-6">
-        <Subheading title="Filmography" />
-      </div>
+      {description && (
+        <>
+          {imageUrl && (
+            <div className="mt-6">
+              <Subheading title="Biography" />
+            </div>
+          )}
+
+          <Description text={description} className={styles.description} />
+        </>
+      )}
+
+      {imageUrl && (
+        <>
+          {" "}
+          <div className="mt-6">
+            <Subheading title="Filmography" />
+          </div>
+        </>
+      )}
 
       <section className={styles.movies}>
         {movies.map((item) => (

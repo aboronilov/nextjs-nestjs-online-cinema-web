@@ -6,6 +6,7 @@ import { getMovieUrl } from "@/config/url.config"
 import { IMovie } from "@/shared/types/movie.types"
 import { FC } from "react"
 import Content from "./Content/Content"
+import VideoPlayer from "@/components/ui/video-player/VideoPlayer"
 
 interface ISingleMoviePage {
   movie: IMovie
@@ -26,7 +27,7 @@ const SingleMovie: FC<ISingleMoviePage> = ({ movie, similarMovies }) => {
         Details={() => <Content movie={movie} />}
       />
 
-      {/* Video Player */}
+      <VideoPlayer slug={movie.slug} videoSource={movie.videoUrl} />
 
       <div className="mt-12">
         <SubHeading title="Similar" />

@@ -33,6 +33,7 @@
     "react-transition-group": "^4.4.5",
     "sanitize-html": "^2.13.0",
     "sass": "^1.77.0",
+    "sharp": "^0.33.4",
     "string-strip-html": "^13.4.8"
   },
   "devDependencies": {
