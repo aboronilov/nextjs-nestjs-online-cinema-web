@@ -11,4 +11,5 @@ export interface IGalleryItem {
 export interface IGalleryItemProps {
   item: IGalleryItem
   variant: "vertical" | "horizontal"
+  isCollection?: boolean
 }

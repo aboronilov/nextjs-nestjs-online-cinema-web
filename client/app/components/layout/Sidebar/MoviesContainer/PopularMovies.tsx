@@ -5,6 +5,8 @@ import { MovieService } from "@/services/movie.service"
 import { FC } from "react"
 import { useQuery } from "react-query"
 import MovieList from "./MovieList"
+import { getRandomItems } from "@/utils/array/getRandomItems"
+import { IMovie } from "@/shared/types/movie.types"
 
 const PopularMovies: FC = () => {
   const { isLoading, data } = useQuery(
@@ -23,7 +25,9 @@ const PopularMovies: FC = () => {
     )
   }
 
-  return <MovieList title="Popular" link="/trending" movies={data || []} />
+  const random = getRandomItems(data as IMovie[], 5)
+
+  return <MovieList title="Popular" link="/trending" movies={random || []} />
 }
 
 export default PopularMovies

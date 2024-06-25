@@ -1,6 +1,7 @@
 import { instance } from "@/api/interceptors"
 import { IProfileInput } from "@/components/screens/profile/profile.interface"
 import { getUserUrl } from "@/config/url.config"
+import { IMovie } from "@/shared/types/movie.types"
 import { IUser } from "@/shared/types/user.types"
 
 export const UserService = {
@@ -16,6 +17,16 @@ export const UserService = {
 
   async getProfile() {
     return instance.get<IUser>(getUserUrl("profile"))
+  },
+
+  async getFavorites() {
+    return instance.get<IMovie[]>(getUserUrl("profile/favorites"))
+  },
+
+  async toggleFavorite(movieId: string) {
+    return instance.patch(getUserUrl("profile/favorites"), {
+      movieId,
+    })
   },
 
   async updateProfile(data: IProfileInput) {

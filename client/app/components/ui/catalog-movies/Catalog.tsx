@@ -3,13 +3,21 @@ import { ICatalog } from "./catalog.interface"
 import Heading from "@/components/ui/heading/Heading"
 import styles from "./Catalog.module.scss"
 import Description from "../heading/Description"
-import { getMovieUrl } from "@/config/url.config"
+import { getGenreUrl, getMovieUrl } from "@/config/url.config"
 import GalleryItemFill from "../gallery/GalleryItemFill"
 import Image from "next/image"
 import { getAssetUrl } from "@/utils/assets/getUrl"
 import Subheading from "../heading/Subheading"
 
-const Catalog: FC<ICatalog> = ({ movies, title, description, imageUrl }) => {
+const Catalog: FC<ICatalog> = ({
+  movies,
+  title,
+  description,
+  imageUrl,
+  isCollection,
+}) => {
+  console.log(movies)
+
   return (
     <>
       <Heading title={title} className={styles.heading} />
@@ -48,23 +56,43 @@ const Catalog: FC<ICatalog> = ({ movies, title, description, imageUrl }) => {
         </>
       )}
 
-      <section className={styles.movies}>
-        {movies.map((item) => (
-          <GalleryItemFill
-            key={item._id}
-            item={{
-              name: item.title,
-              link: getMovieUrl(item.slug),
-              posterPath: `/uploads/movies/${item.slug}/big-poster.webp`,
-              content: {
-                title: item.title,
-                // subTitle: item.description,
-              },
-            }}
-            variant="horizontal"
-          />
-        ))}
-      </section>
+      {isCollection ? (
+        <section className={styles.movies}>
+          {movies.map((item: any) => (
+            <GalleryItemFill
+              key={item._id}
+              item={{
+                name: item.title,
+                link: getGenreUrl(item.slug),
+                posterPath: item.image,
+                content: {
+                  title: item.title,
+                  // subTitle: item.description,
+                },
+              }}
+              variant="horizontal"
+            />
+          ))}
+        </section>
+      ) : (
+        <section className={styles.movies}>
+          {movies.map((item) => (
+            <GalleryItemFill
+              key={item._id}
+              item={{
+                name: item.title,
+                link: getMovieUrl(item.slug),
+                posterPath: `/uploads/movies/${item.slug}/big-poster.webp`,
+                content: {
+                  title: item.title,
+                  // subTitle: item.description,
+                },
+              }}
+              variant="horizontal"
+            />
+          ))}
+        </section>
+      )}
     </>
   )
 }
